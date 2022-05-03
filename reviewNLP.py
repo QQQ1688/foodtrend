@@ -1,6 +1,5 @@
 # references:
 # https://github.com/willismax/py-scraping-analysis-book/commit/6af384b535bc2cc42df9f4741f6dbfff787f0362#diff-a953591fc8ee1f094b843193c4fbc88f860f4fe2318aa474725d1b921b18cd4e
-# 基本語意分析-以PTT電影版透過機械學習方式舉例
 # https://github.com/willismax/ICT-Python-101/blob/master/04.Python%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E6%87%89%E7%94%A8-%E8%AA%9E%E6%84%8F%E5%88%86%E6%9E%90%E7%AF%87NLP.ipynb
 
 import requests
