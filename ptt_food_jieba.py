@@ -72,7 +72,7 @@ for item in keywords:
 #     # 分別爲關鍵詞和相應的權重
 #     print(item[0], item[1])
 
-"""3.制作词云图"""
+"""3.製作文字雲"""
 
 from wordcloud import WordCloud
 import jieba
@@ -97,13 +97,13 @@ with open(r"/content/drive/MyDrive/ptt_food/ptt_body.txt" ,encoding="utf-8")as f
     # image.show()
     wordcloud.to_file('/content/drive/MyDrive/ptt_food/词云图.png')  # 把词云保存下来
 
-"""4.分词统计"""
+"""4.詞頻统计計"""
 
 import sys
 import jieba
 import jieba.analyse
 import json  # 把詞頻字典 json.dumps() 存成 json 以便下次用 json.loads() 讀取
-import xlwt  # 寫入Excel表的库
+import xlwt  # 寫入Excel表的套件
 
 # reload(sys)
 # sys.setdefaultencoding('utf-8')
@@ -123,10 +123,10 @@ if __name__ == "__main__":
             word_lst.append(t)
 
     word_dict = {}
-    with open("分词结果.txt", 'w') as wf2:  # 指定生成文件的名称
+    with open("分词结果.txt", 'w') as wf2:  # 指定生成文件的名稱
 
         for item in word_lst:
-            if item not in word_dict:  # 统计數量
+            if item not in word_dict:  # 統計數量
                 word_dict[item] = 1
             else:
                 word_dict[item] += 1
