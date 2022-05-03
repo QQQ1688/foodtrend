@@ -1,6 +1,6 @@
-# ch3/ptt_gossiping.py
+# references:
 # https://github.com/willismax/py-scraping-analysis-book/commit/6af384b535bc2cc42df9f4741f6dbfff787f0362#diff-a953591fc8ee1f094b843193c4fbc88f860f4fe2318aa474725d1b921b18cd4e
-# 04-2 基本語意分析-以PTT電影版透過機械學習方式舉例
+# 基本語意分析-以PTT電影版透過機械學習方式舉例
 # https://github.com/willismax/ICT-Python-101/blob/master/04.Python%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90%E6%87%89%E7%94%A8-%E8%AA%9E%E6%84%8F%E5%88%86%E6%9E%90%E7%AF%87NLP.ipynb
 
 import requests
@@ -32,10 +32,9 @@ def get_web_page(url):
 
 def sanitize(txt):
     # 保留英數字, 中文 (\u4e00-\u9fa5) 及中文標點, 部分特殊符號
-    # http://ubuntu-rubyonrails.blogspot.com/2009/06/unicode.html
+
     expr = re.compile('[^\u4e00-\u9fa5。；，：“”（）、？「」『』【】\s\w:/\-.()]')  # ^ 表示"非括號內指定的字元"
     txt = re.sub(expr, '', txt)
-    # txt = re.sub('[。；，：“”（）、？「」『』【】:/\-_.()]', ' ', txt)  # 用空白取代中英文標點
     txt = re.sub('(\s)+', ' ', txt)  # 用單一空白取代多個換行或 tab 符號
     txt = txt.replace('--', '')
     txt = txt.lower()  # 英文字轉為小寫
@@ -80,16 +79,8 @@ def get_article_body(df):
     for i in range(len(df['href'])):
         body = get_post(df['href'][i])
         print('處理', df['title'][i], df['href'][i])
-        # title = ' '.join(df['title'][i].split(']')[1:])
-        # title = sanitize(title)
-        # titles.append(title)
         bodys.append(body)
         time.sleep(random.choice(range(1,7)))  # 放慢爬蟲速度
-    
-    # df_body = pd.DataFrame({
-    #     'title': df['title'],
-    #     'body' : bodys,
-    # })
 
     df['body'] = bodys
     return df
@@ -104,7 +95,6 @@ def get_articles_all_text(ptt_food_today_page_num, n):
 
         divs = soup.find_all('div', 'r-ent')
         for d in divs:
-            # if d.find('div', 'date').text.strip() == date:  # 發文日期正確
             # 取得推文數
             push_count = 0
             push_str = d.find('div', 'nrec').text
@@ -127,7 +117,6 @@ def get_articles_all_text(ptt_food_today_page_num, n):
                 body = get_post(href) #　取得PO文內文
                 print('處理', title, href, '的po文')
                 time.sleep(random.choice(range(1,6)))  # 放慢爬蟲速度
-                # author = d.find('div', 'author').text if d.find('div', 'author') else ''
                 articles.append({
                     'date': date,
                     'title': title,
@@ -202,12 +191,6 @@ def Jieba_Analysis(csv_file):
     ## 將CSV內的分店留言內容與食記內容存成一整個字串
     try:    
         df = pd.read_csv(csv_file)
-
-        # 開到沒資料的csv會報錯
-                # # 只對一年內的文章進行分析
-                # if article_timestamp > Stopby_timestamp :
-                #     article_content += content_row
-
         ## 進行詞頻分析
         word_count = {}
         for row in range(df.Shape[0]):
